@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wedding Admin Panel</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+
+<div id="toastBox"></div>
+
+
+<!-- Confirmation Modal -->
+
+<div id="confirmModal" class="modal-overlay">
+
+
+<div class="confirm-box">
+
+
+<h2 id="confirmTitle">
+⚠️ Confirm Action
+</h2>
+
+
+<p id="confirmMessage">
+
+Are you sure?
+
+</p>
+
+
+
+<div class="confirm-buttons">
+
+
+<button id="cancelConfirm">
+
+Cancel
+
+</button>
+
+
+<button id="acceptConfirm">
+
+Delete
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<body>
+
+    <div class="admin-container">
+
+        <!-- Sidebar -->
+
+        <aside class="sidebar">
+
+            <h2>💍 Wedding21</h2>
+
+            <button class="nav-btn active" data-page="dashboard">
+                📊 Dashboard
+            </button>
+
+            <button class="nav-btn" data-page="guests">
+                👥 Guests
+            </button>
+
+            <button class="nav-btn" data-page="rsvp">
+                ❤️ RSVP
+            </button>
+
+            <button class="nav-btn" data-page="settings">
+                ⚙ Settings
+            </button>
+
+        </aside>
+
+
+
+        <!-- Main Content -->
+
+        <main class="content">
+
+            <!-- Dashboard -->
+
+            <section id="dashboard" class="page active-page">
+
+
+                <h1>
+                    💍 Wedding21 Dashboard
+                </h1>
+
+
+                <div class="dashboard-cards">
+
+
+                    <div class="dash-card">
+
+                        <h3>
+                            Total Invitations
+                        </h3>
+
+                        <p id="totalCount">
+                            0
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="dash-card">
+
+                        <h3>
+                            ✅ Coming
+                        </h3>
+
+                        <p id="yesCount">
+                            0
+                        </p>
+
+                    </div>
+
+
+
+
+                    <div class="dash-card">
+
+                        <h3>
+                            ❌ Not Coming
+                        </h3>
+
+                        <p id="noCount">
+                            0
+                        </p>
+
+                    </div>
+
+
+
+
+                    <div class="dash-card">
+
+                        <h3>
+                            ⏳ Pending
+                        </h3>
+
+                        <p id="pendingCount">
+                            0
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="attendance-box">
+
+
+                    <h2>
+                        Attendance Progress
+                    </h2>
+
+
+                    <div class="progress">
+
+                        <div id="progressBar">
+
+                        </div>
+
+                    </div>
+
+
+                    <p id="percentage">
+
+                        0%
+
+                    </p>
+
+
+                </div>
+
+
+
+
+
+                <div class="recent-box">
+
+
+                    <h2>
+                        💌 Latest RSVP Response
+                    </h2>
+
+
+                    <div id="latestRSVP">
+
+                        Loading...
+
+                    </div>
+
+
+                </div>
+
+
+
+            </section>
+
+
+
+            <section id="guests" class="page">
+
+                <h1>Guest Manager</h1>
+
+                <div class="guest-toolbar">
+
+                    <button id="addGuestBtn">
+
+                        ➕ Add Guest
+
+                    </button>
+
+                    <input type="text" id="guestSearch" placeholder="Search Guest...">
+
+                </div>
+
+
+                <div id="guestForm" class="guest-form hidden">
+
+
+                    <h2>Add New Guest</h2>
+
+
+                    <input id="newGuestName" placeholder="Guest Name">
+
+
+                    <select id="newGuestCategory">
+
+
+                        <option>Family</option>
+
+                        <option>Groom Family</option>
+
+                        <option>Bride Family</option>
+
+                        <option>Friends</option>
+
+                        <option>Office</option>
+
+                        <option>VIP</option>
+
+
+                    </select>
+
+
+
+                    <input id="newGuestPhone" placeholder="Phone Number">
+
+
+
+                    <input id="newGuestEmail" placeholder="Email">
+
+
+
+                    <div>
+
+
+                        <button id="saveGuestBtn">
+
+                            Save Guest
+
+                        </button>
+
+
+                        <button id="cancelGuestBtn">
+
+                            Cancel
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div id="guestList">
+
+                    <!-- Guest Cards will appear here -->
+
+                </div>
+
+
+
+            </section>
+
+
+
+            <!-- RSVP -->
+
+            <section id="rsvp" class="page">
+
+
+                <h1>
+                ❤️ RSVP Manager
+                </h1>
+                
+                
+                
+                <div class="rsvp-filter">
+                
+                
+                <button onclick="filterRSVP('ALL')">
+                
+                All
+                
+                </button>
+                
+                
+                <button onclick="filterRSVP('YES')">
+                
+                ✅ Coming
+                
+                </button>
+                
+                
+                <button onclick="filterRSVP('NO')">
+                
+                ❌ Not Coming
+                
+                </button>
+                
+                
+                <button onclick="filterRSVP('PENDING')">
+                
+                ⏳ Pending
+                
+                </button>
+                
+                
+                </div>
+                
+                
+                
+                <div id="rsvpList">
+                
+                
+                Loading...
+                
+                
+                </div>
+                
+                
+                </section>
+
+
+
+            <!-- Settings -->
+
+            <section id="settings" class="page">
+
+                <h1>Settings</h1>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script type="module" src="admin.js"></script>
+
+</body>
+
+</html>
